@@ -22,25 +22,25 @@ public class AddressController {
 
     @PostMapping
     @Operation(summary = "Cadastra novo endereço", description = "Necessário informar o ID da pessoa referente a este endereço")
-    private Address saveAddress(@RequestBody Address address) {
+    public Address saveAddress(@RequestBody Address address) {
         return repository.save(address);
     }
 
     @GetMapping
     @Operation(summary = "Consulta endereços", description = "Consulta todos os endereços cadastrados")
-    private List<Address> findAll() {
+    public List<Address> findAll() {
         return repository.findAll();
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Consulta um endereço", description = "Busca o endereço do id informado")
-    private Optional<Address> findById(@RequestParam Long id) {
+    public Optional<Address> findById(@RequestParam Long id) {
         return repository.findById(id);
     }
 
     @PutMapping
     @Operation(summary = "Atualiza endereço", description = "Atualiza endereço do id informado")
-    private Address updateAddress(@RequestBody Address address) {
+    public Address updateAddress(@RequestBody Address address) {
         if (repository.findById(address.getId()).isPresent())
             return repository.save(address);
         else
@@ -49,7 +49,7 @@ public class AddressController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Deleta endereço", description = "Deleta endereço do id informado")
-    private void deleteAddress(@RequestBody Long id) {
+    public void deleteAddress(@RequestBody Long id) {
         if(repository.findById(id).isPresent())
             repository.deleteById(id);
     }
